@@ -1,5 +1,15 @@
 var exec = require('cordova/exec');
 
+exports.INPUT  = 0;
+exports.OUTPUT = 1;
+exports.ANALOG = 2;
+exports.PWM    = 3;
+exports.SERVO  = 4;
+exports.SHIFT  = 5;
+exports.I2C    = 6;
+exports.LOW    = false;
+exports.HIGH   = true;
+
 exports.getBoardVersion = function(success, error) {
     exec(success, error, "Firmata", "getBoardVersion", []);
 };
@@ -8,46 +18,38 @@ exports.connect = function(success, error) {
     exec(success, error, "Firmata", "connect", []);
 };
 
-// exports.isOpen = function(arg0, success, error) {
-//     exec(success, error, "Firmata", "isOpen", [arg0]);
-// };
+exports.isOpen = function(success, error) {
+    exec(success, error, "Firmata", "isOpen", []);
+};
 
-// exports.close = function(arg0, success, error) {
-//     exec(success, error, "Firmata", "close", [arg0]);
-// };
+exports.close = function(success, error) {
+    exec(success, error, "Firmata", "close", []);
+};
 
-// exports.write = function(arg0, success, error) {
-//     exec(success, error, "Firmata", "write", [arg0]);
-// };
+exports.reset = function(success, error) {
+    exec(success, error, "Firmata", "reset", []);
+};
 
-// exports.reset = function(arg0, success, error) {
-//     exec(success, error, "Firmata", "reset", [arg0]);
-// };
+exports.digitalRead = function(pin, success, error) {
+    exec(success, error, "Firmata", "digitalRead", [pin]);
+};
 
-// exports.sysex = function(arg0, success, error) {
-//     exec(success, error, "Firmata", "sysex", [arg0]);
-// };
+exports.analogRead = function(pin, success, error) {
+    exec(success, error, "Firmata", "analogRead", [pin]);
+};
 
-// exports.digitalRead = function(arg0, success, error) {
-//     exec(success, error, "Firmata", "digitalRead", [arg0]);
-// };
+exports.pinMode = function(pin, mode, success, error) {
+    exec(success, error, "Firmata", "pinMode", [pin, mode]);
+};
 
-// exports.analogRead = function(arg0, success, error) {
-//     exec(success, error, "Firmata", "analogRead", [arg0]);
-// };
+exports.digitalWrite = function(pin, value, success, error) {
+    exec(success, error, "Firmata", "digitalWrite", [pin, value]);
+};
 
-// exports.pinMode = function(arg0, success, error) {
-//     exec(success, error, "Firmata", "pinMode", [arg0]);
-// };
+exports.analogWrite = function(pin, value, success, error) {
+    exec(success, error, "Firmata", "analogWrite", [pin, value]);
+};
 
-// exports.digitalWrite = function(arg0, success, error) {
-//     exec(success, error, "Firmata", "digitalWrite", [arg0]);
-// };
-
-// exports.analogWrite = function(arg0, success, error) {
-//     exec(success, error, "Firmata", "analogWrite", [arg0]);
-// };
-
-// exports.servoWrite = function(arg0, success, error) {
-//     exec(success, error, "Firmata", "servoWrite", [arg0]);
-// };
+exports.servoWrite = function(pin, angle, success, error) {
+    exec(success, error, "Firmata", "servoWrite", [pin, angle]);
+};
