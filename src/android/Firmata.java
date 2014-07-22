@@ -99,12 +99,12 @@ public class Firmata extends CordovaPlugin {
 
     private void isOpen(final CallbackContext callbackContext) {
         boolean value = arduino.isOpen();
-        callbackContext.success(String.valueOf(value));
+        callbackContext.success(boolToInt(value));
     }
 
     private void close(final CallbackContext callbackContext) {
         boolean value = arduino.close();
-        callbackContext.success(String.valueOf(value));
+        callbackContext.success(boolToInt(value));
     }
 
     private void reset(final CallbackContext callbackContext) {
@@ -114,7 +114,7 @@ public class Firmata extends CordovaPlugin {
 
     private void digitalRead(final int pin, final CallbackContext callbackContext) {
         boolean value = arduino.digitalRead(pin);
-        callbackContext.success(String.valueOf(value));
+        callbackContext.success(boolToInt(value));
     }
 
     private void analogRead(final int pin, final CallbackContext callbackContext) {
@@ -140,5 +140,9 @@ public class Firmata extends CordovaPlugin {
     private void servoWrite(final int pin, final int angle, final CallbackContext callbackContext) {
         arduino.servoWrite(pin, angle);
         callbackContext.success();
+    }
+
+    private int boolToInt(boolean b) {
+        return b ? 1 : 0;
     }
 }
