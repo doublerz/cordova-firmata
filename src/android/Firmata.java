@@ -85,16 +85,20 @@ public class Firmata extends CordovaPlugin {
     }
 
     private void connect(final CallbackContext callbackContext) {
-        try{
-            arduino.connect();
-            getBoardVersion(callbackContext);
-        }
-        catch(IOException e){
-            callbackContext.error(e.getMessage());
-        }
-        catch(InterruptedException e){
-            callbackContext.error(e.getMessage());
-        }
+        cordova.getThreadPool().execute(new Runnable() {
+            public void run() {
+                try{
+                    arduino.connect();
+                    callbackContext.success();
+                }
+                catch(IOException e){
+                    callbackContext.error(e.getMessage());
+                }
+                catch(InterruptedException e){
+                    callbackContext.error(e.getMessage());
+                }
+            }
+        });
     }
 
     private void isOpen(final CallbackContext callbackContext) {
